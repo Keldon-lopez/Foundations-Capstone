@@ -1,12 +1,12 @@
 require('dotenv').config()
-app.listen(process.env.SERVER_PORT, () => console.log(`server running on port ${process.env.SERVER_PORT}`));
-const Sequelize = require('sequelize')
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const {SERVER_PORT} = process.env
+const {seed, getTickets} = require('./controller.js')
 
-const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
-    dialect: 'postgres',
-    dialectOptions: {
-        ssl: {
-            rejectUnauthorized: false
-        }
-    }
-})
+// DEV
+app.post('/seed', seed)
+
+// COUNTRIES
+app.get('/tickets', getTickets)
