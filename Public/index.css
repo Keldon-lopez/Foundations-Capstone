@@ -1,0 +1,18 @@
+body {
+    background-color: #D9D9D9;
+}
+
+button {
+    border-radius: 10px;
+    background: #A39E9E;
+    color: white;
+}
+
+input {
+    background-color: #A39E9E;
+    
+    font-weight: bolder;
+}
+::placeholder {
+    color: white;
+}
