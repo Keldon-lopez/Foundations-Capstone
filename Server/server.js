@@ -11,7 +11,7 @@ app.use(cors())
 // DEV
 app.post('/seed', seed)
 
-// COUNTRIES
+// TICKETS
 app.get('/tickets', getTickets)
 
 
