@@ -1,3 +1,5 @@
+
+
 body {
     background-color: #D9D9D9;
 }
@@ -15,4 +17,21 @@ input {
 }
 ::placeholder {
     color: white;
+}
+
+.usernameIcon {
+    display: flex;
+    justify-content: left;
+    padding-left: 5px;
+    margin: 0;
+    width: 100%;
+    
+}
+
+.usernameText {
+    border-radius: 10px;
+    background: #A39E9E;
+    color: white;
+    padding: 5px;
+    margin: 0;
 }
