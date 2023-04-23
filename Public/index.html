@@ -13,54 +13,8 @@
       </form>
     </div>
     <main>
-        <div id="ticketingInterface">
-            <div id="ticketFormContainer">
-                <form id="ticketSubmissionForm">
-                    <div id="selectors">
-                        <select placeholder="Select Priority">
-                            <option>Select Priority</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                        <select>
-                            <option>Select Issue</option>
-                            <option value="Computer">Computer</option>
-                            <option value="Internet">Internet</option>
-                            <option value="Application">Application</option>
-                        </select>
-                    </div>
-                    <br>
-                    <textarea
-                    type="text"
-                    id="ticketDescription"
-                    placeholder="Enter Description of your problem"
-                    ></textarea>
-                    <br>
-                    <div id="ticketSubmitButtonContainer">
-                        <button>Submit</button>
-                    </div>
-                </form>
-                </div>
-            <div id="ticketListContainer">
-                    <table id="ticketTable">
-                        <tbody>
-                            <tr>
-                                <th>Ticket #</th>
-                                <th>Priority</th>
-                                <th>Issue Type</th>
-                                <th>Status</th>
-                                <th>Ticket Description</th>
-                            </tr>
-                            <tr></tr>
-                            <tr></tr>
-                            <tr></tr>
-                            <tr></tr>
-                        </tbody>
-                    </table>
-            </div>
-        </div>
     </main>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

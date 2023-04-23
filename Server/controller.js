@@ -44,6 +44,7 @@ module.exports = {
     getTickets: (req, res) => {
         sequelize.query('select * from tickets;')
         .then((dbRes) => {
+            console.log(dbRes)
             res.status(200).send(dbRes[0])
          }
         )
