@@ -1,6 +1,7 @@
 const dotenv = require('dotenv').config();
 const { CONNECTION_STRING } = process.env;
 const Sequelize = require('sequelize')
+const { QueryTypes } = require('sequelize');
 
 const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
     dialect: 'postgres',
@@ -44,9 +45,37 @@ module.exports = {
     getTickets: (req, res) => {
         sequelize.query('select * from tickets;')
         .then((dbRes) => {
-            console.log(dbRes)
             res.status(200).send(dbRes[0])
          }
         )
     },
+
+    createUser: (req, res) =>{
+        const {username} = req.body;
+        sequelize.query(`SELECT * FROM users WHERE username ='${username}';`,{ type: QueryTypes.SELECT })
+        .then((dbRes) => {
+            let emptyArr = [];
+            // This is always returning false and I am not sure why.
+            if (dbRes === emptyArr) {
+                console.log("noUserFound",typeof dbRes, username)
+            } else {
+                console.log("userFound", dbRes, typeof dbRes, emptyArr, typeof emptyArr)
+            }
+            
+            res.status(200).send()})
+        .catch(err => console.log("err",err))
+    },
+
+    createTicket: (req, res) => {
+        const {username, priority, type, description} = req.body;
+        sequelize.query(`
+        insert into tickets (username, priority, type, status, description) 
+        values ('${username}', ${priority}, '${type}', 'open', '${description}');`)
+        .then((dbRes) => {
+            res.status(200).send(dbRes[0])
+         }).catch((err) => {
+            console.log(err);
+         })
+    },
+    
 }
