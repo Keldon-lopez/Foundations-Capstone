@@ -91,6 +91,8 @@ const getTickets = () => {
 
   axios.get(`${baseURL}tickets/`).then((res) => {
     ticketBody.innerHTML = "";
+    let ticketArr = res.data;
+    ticketArr.sort(function(a, b){return a.ticket_id - b.ticket_id});
     res.data.forEach((elem) => {
       console.log(elem);
       let { ticket_id, priority, username, type, status, description } = elem;
