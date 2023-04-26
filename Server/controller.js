@@ -52,17 +52,18 @@ module.exports = {
 
     createUser: (req, res) =>{
         const {username} = req.body;
-        sequelize.query(`SELECT * FROM users WHERE username ='${username}';`,{ type: QueryTypes.SELECT })
+        sequelize.query('SELECT * FROM users WHERE username = ?',{ replacements: [`${username}`],type: QueryTypes.SELECT })       
         .then((dbRes) => {
-            let emptyArr = [];
-            // This is always returning false and I am not sure why.
-            if (dbRes === emptyArr) {
-                console.log("noUserFound",typeof dbRes, username)
+            console.log("dbres",dbRes)
+            if (!dbRes.length) {
+                console.log("noUserFound", dbRes, username)
+                sequelize.query(`insert into users (username) values ('?')`,{ replacements: [`${username}`],type: QueryTypes.INSERT })
+                res.status(201).send('user was created')
             } else {
-                console.log("userFound", dbRes, typeof dbRes, emptyArr, typeof emptyArr)
+                console.log("userFound", dbRes)
+                res.status(200).send('User Found')
             }
-            
-            res.status(200).send()})
+            })
         .catch(err => console.log("err",err))
     },
 
