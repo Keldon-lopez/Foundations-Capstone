@@ -41,8 +41,8 @@ input {
   flex-direction: row;
   justify-content: space-between;
   margin: 20px;
-  
 }
+
 #ticketSubmissionForm {
   display: flex;
   flex-direction: column;
@@ -66,9 +66,12 @@ select {
   background-color: #d9d9d9;
   resize: none;
   color: black;
-  height: 30vh;
+  padding: 0;
+  border-width: 0;
+  height: 30em;
   width: 30vw;
 }
+
 #ticketSubmitButtonContainer {
   display: flex;
   flex-direction: row-reverse;
@@ -115,4 +118,16 @@ td {
 }
 #description {
   width: auto;
+}
+
+@media (max-width: 1250px) {
+  #ticketDescription, #ticketTable{
+    width: 100%;
+  }
+  #ticketingInterface {
+    flex-direction: column;
+  }
+  #ticketListContainer{
+    padding-top: 10px;
+  }
 }

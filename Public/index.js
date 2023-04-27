@@ -20,7 +20,6 @@ const signIn = (e) => {
 
     let usernameIcon = document.createElement("div");
     let ticketingInterface = document.createElement("div");
-    ticketingInterface.classList.add("ticketingInterface");
     ticketingInterface.innerHTML = `<div id="ticketingInterface">
         <div id="ticketFormContainer">
             <form id="ticketSubmissionForm">
@@ -93,7 +92,7 @@ const getTickets = () => {
     ticketBody.innerHTML = "";
     let ticketArr = res.data;
     ticketArr.sort(function(a, b){return a.ticket_id - b.ticket_id});
-    res.data.forEach((elem) => {
+    ticketArr.forEach((elem) => {
       console.log(elem);
       let { ticket_id, priority, username, type, status, description } = elem;
       let ticketRow = document.createElement("tr");
