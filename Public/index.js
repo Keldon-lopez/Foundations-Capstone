@@ -125,6 +125,10 @@ const createTicket = (e) => {
   };
 
   axios.post(`${baseURL}tickets/`, body).then(() => {
+    
+    document.querySelector(`#ticketDescription`).value = ``;
+    document.querySelector(`#prioritySelect`).selectedIndex  = 0;
+    document.querySelector(`#issueTypeSelect`).selectedIndex  = 0;
     getTickets();
   });
 };
