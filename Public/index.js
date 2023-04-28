@@ -93,28 +93,29 @@ const getTickets = () => {
     let ticketArr = res.data;
     ticketArr.sort(function(a, b){return a.ticket_id - b.ticket_id});
     ticketArr.forEach((elem) => {
-      console.log(elem);
       let { ticket_id, priority, username, type, status, description } = elem;
       let ticketRow = document.createElement("tr");
       ticketRow.innerHTML = `
         <td>${ticket_id}</td>
-        <td>${priority}</td>
+        <td><select class = "${ticket_id} priority ticketSelectors" id= "priority${ticket_id}"><option>1</option><option>2</option><option>3</option></select></td>
         <td>${username}</td>
-        <td>${type}</td>
-        <td>${status}</td>
+        <td><select class = "${ticket_id} type ticketSelectors" id= "type${ticket_id}"><option>Computer</option><option>Internet</option><option>Application</option></select></td>
+        <td><select class = "${ticket_id} status ticketSelectors" id= "status${ticket_id}"><option>open</option><option>closed</option></select></td>
         <td>${description}</td>
         `;
       ticketBody.appendChild(ticketRow);
+      document.querySelector(`#priority${ticket_id}`).value = `${priority}`;
+      document.querySelector(`#type${ticket_id}`).value = `${type}`;
+      document.querySelector(`#status${ticket_id}`).value = `${status}`;
+      
     });
+    let ticketSelectors = document.querySelectorAll(`.ticketSelectors`);
+    ticketSelectors.forEach(valueSelect => {valueSelect.addEventListener("change", updateValue)});
   });
 };
 
 const createTicket = (e) => {
   e.preventDefault();
-  console.log("User", ticketCreator);
-  console.log("Priority", e.target[0].value);
-  console.log("Issue Type", e.target[1].value);
-  console.log("description", e.target[2].value);
 
   let body = {
     username: ticketCreator,
@@ -127,5 +128,18 @@ const createTicket = (e) => {
     getTickets();
   });
 };
+
+const updateValue = (e) => {
+  console.log(e)
+  console.log("ticketID", e.target.classList[0])
+  console.log("newValue",e.target.value)
+  console.log("valueUpdated", e.target.classList[1])
+  let body = {
+    ticket_id: e.target.classList[0],
+    value: e.target.value,
+    valueUpdated: e.target.classList[1]
+  }
+  axios.put(`${baseURL}tickets/`, body).then(() => {getTickets()});
+}
 
 loginForm.addEventListener("submit", signIn);

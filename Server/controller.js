@@ -54,7 +54,6 @@ module.exports = {
         const {username} = req.body;
         sequelize.query('SELECT * FROM users WHERE username = ?',{ replacements: [`${username}`],type: QueryTypes.SELECT })       
         .then((dbRes) => {
-            console.log("dbres",dbRes)
             if (!dbRes.length) {
                 console.log("noUserFound", dbRes, username)
                 sequelize.query(`insert into users (username) values ('?')`,{ replacements: [`${username}`],type: QueryTypes.INSERT })
@@ -79,4 +78,16 @@ module.exports = {
          })
     },
     
+    updateValue: (req, res) => {
+        const {ticket_id, value, valueUpdated} = req.body;
+        sequelize.query(`
+        UPDATE tickets
+        SET ${valueUpdated} = '${value}'
+        WHERE ticket_id = ${ticket_id};`)
+        .then(() => {
+            res.status(200).send('valueUpdated')
+         }).catch((err) => {
+            console.log(err);
+         })
+    }
 }

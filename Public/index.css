@@ -107,6 +107,9 @@ td {
 #priority{
   width: 30px;
 }
+.priority{
+  width: 100%;
+}
 #createdBy{
   width: 80px;
 }
