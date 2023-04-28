@@ -43,7 +43,8 @@ module.exports = {
     },
 
     getTickets: (req, res) => {
-        sequelize.query('select * from tickets;')
+        sequelize.query(`select * from tickets
+        ORDER BY ticket_id ASC;`)
         .then((dbRes) => {
             res.status(200).send(dbRes[0])
          }
