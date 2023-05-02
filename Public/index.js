@@ -16,7 +16,7 @@ const signIn = (e) => {
     return;
   } else {
     let body = {username: ticketCreator}
-    axios.post(`${baseURL}users`, body).then(() => {});
+    axios.post(`/users`, body).then(() => {});
 
     let usernameIcon = document.createElement("div");
     let ticketingInterface = document.createElement("div");
@@ -88,7 +88,7 @@ const getTickets = () => {
   `;
   const ticketBody = document.querySelector("#ticketBody");
 
-  axios.get(`${baseURL}tickets/`).then((res) => {
+  axios.get(`/tickets/`).then((res) => {
     ticketBody.innerHTML = "";
     res.data.forEach((elem) => {
       let { ticket_id, priority, username, type, status, description } = elem;
@@ -122,7 +122,7 @@ const createTicket = (e) => {
     description: e.target[2].value,
   };
 
-  axios.post(`${baseURL}tickets/`, body).then(() => {
+  axios.post(`/tickets/`, body).then(() => {
     
     document.querySelector(`#ticketDescription`).value = ``;
     document.querySelector(`#prioritySelect`).selectedIndex  = 0;
@@ -141,7 +141,7 @@ const updateValue = (e) => {
     value: e.target.value,
     valueUpdated: e.target.classList[1]
   }
-  axios.put(`${baseURL}tickets/`, body).then(() => {getTickets()});
+  axios.put(`/tickets/`, body).then(() => {getTickets()});
 }
 
 loginForm.addEventListener("submit", signIn);
