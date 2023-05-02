@@ -1,14 +1,17 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const path = require('path')
 const cors = require('cors')
 const {SERVER_PORT} = process.env
 const {seed, getTickets, createTicket, createUser, updateValue} = require('./controller.js')
 
+app.use(express.static(path.join(__dirname, '../public')))
+
 app.use(express.json())
 app.use(cors())
 
-app.use(express.static(`${__dirname}../Public`))
+
 
 // DEV
 app.post('/seed', seed)
