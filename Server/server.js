@@ -8,6 +8,8 @@ const {seed, getTickets, createTicket, createUser, updateValue} = require('./con
 app.use(express.json())
 app.use(cors())
 
+app.use(express.static(`${__dirname}/public`))
+
 // DEV
 app.post('/seed', seed)
 
