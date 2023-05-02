@@ -5,7 +5,7 @@ const cors = require('cors')
 const {SERVER_PORT} = process.env
 const {seed, getTickets, createTicket, createUser, updateValue} = require('./controller.js')
 
-app.use(express.static(`${__dirname}../Public`))
+app.use(express.static(`${__dirname}/Public`))
 
 app.use(express.json())
 app.use(cors())
