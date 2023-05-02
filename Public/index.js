@@ -132,10 +132,6 @@ const createTicket = (e) => {
 };
 
 const updateValue = (e) => {
-  console.log(e)
-  console.log("ticketID", e.target.classList[0])
-  console.log("newValue",e.target.value)
-  console.log("valueUpdated", e.target.classList[1])
   let body = {
     ticket_id: e.target.classList[0],
     value: e.target.value,
