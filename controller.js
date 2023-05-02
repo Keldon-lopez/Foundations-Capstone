@@ -57,7 +57,7 @@ module.exports = {
         .then((dbRes) => {
             if (!dbRes.length) {
                 console.log("noUserFound", dbRes, username)
-                sequelize.query(`insert into users (username) values ('?')`,{ replacements: [`${username}`],type: QueryTypes.INSERT })
+                sequelize.query(`insert into users (username) values (:replaced)`,{ replacements: {replaced: `${username}`},type: QueryTypes.INSERT })
                 res.status(201).send('user was created')
             } else {
                 console.log("userFound", dbRes)
