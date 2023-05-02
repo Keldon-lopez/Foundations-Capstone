@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:4444/";
+const baseURL = "/api/";
 
 const body = document.querySelector("body");
 const login = document.querySelector("#Login");
