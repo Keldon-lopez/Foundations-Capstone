@@ -10,8 +10,6 @@ app.use(express.static(`${__dirname}../Public`))
 app.use(express.json())
 app.use(cors())
 
-
-
 // DEV
 app.post('/seed', seed)
 
