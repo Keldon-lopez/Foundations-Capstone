@@ -15,23 +15,23 @@ const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
 module.exports = {
     seed: (req, res) => {
         sequelize.query(`
-            drop table if exists users;
+            drop table if exists ticketUsers;
             drop table if exists tickets;
 
-            create table users (
+            create table ticketUsers (
                 user_id serial primary key, 
                 username varchar NOT NULL UNIQUE
             );
             create table tickets (
                 ticket_id serial primary key,
-                username varchar REFERENCES users(username),
+                username varchar REFERENCES ticketUsers(username),
                 priority integer ,
                 type varchar ,
                 status varchar ,
                 description varchar                 
             );
 
-            insert into users (username)
+            insert into ticketUsers (username)
             values ('testUser');
 
             insert into tickets (username, priority, type, status, description) 
@@ -53,11 +53,11 @@ module.exports = {
 
     createUser: (req, res) =>{
         const {username} = req.body;
-        sequelize.query('SELECT * FROM users WHERE username = ?',{ replacements: [`${username}`],type: QueryTypes.SELECT })       
+        sequelize.query('SELECT * FROM ticketUsers WHERE username = ?',{ replacements: [`${username}`],type: QueryTypes.SELECT })       
         .then((dbRes) => {
             if (!dbRes.length) {
                 console.log("noUserFound", dbRes, username)
-                sequelize.query(`insert into users (username) values (:replaced)`,{ replacements: {replaced: `${username}`},type: QueryTypes.INSERT })
+                sequelize.query(`insert into ticketUsers (username) values (:replaced)`,{ replacements: {replaced: `${username}`},type: QueryTypes.INSERT })
                 res.status(201).send('user was created')
             } else {
                 console.log("userFound", dbRes)
